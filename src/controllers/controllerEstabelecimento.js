@@ -81,7 +81,36 @@ const todosEstabelecimento = async (req, res) => {
     } catch (error) {
         res.status(404).json(error)
     }
-}
+};
 
 
-export { loginEstabelecimento, criarEstabelecimento, todosEstabelecimento };
+// GET /api/estabelecimentos/:slug
+const EstabelecimentoSlug = async (req, res) => {
+  const { slug } = req.params;
+  const estabelecimento = await prisma.estabelecimento.findUnique({
+    where: { slug }
+  });
+
+  if(!estabelecimento) return res.status(404).json({ error: "Estabelecimento não encontrado" });
+
+  res.json(estabelecimento);
+};
+
+// POST /api/clientes
+/*app.post("/api/clientes", async (req, res) => {
+  const { nome, email, senha, estabelecimentoId } = req.body;
+
+  const cliente = await prisma.cliente.create({
+    data: {
+      nome,
+      email,
+      senha, // ideal hash com bcrypt
+      estabelecimentoId
+    }
+  });
+
+  res.json(cliente);
+});*/
+
+
+export { loginEstabelecimento, criarEstabelecimento, todosEstabelecimento, EstabelecimentoSlug };

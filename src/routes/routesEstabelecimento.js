@@ -1,5 +1,5 @@
 import express from "express";
-import { criarEstabelecimento, loginEstabelecimento, todosEstabelecimento } from "../controllers/controllerEstabelecimento.js";
+import { criarEstabelecimento, EstabelecimentoSlug, loginEstabelecimento, todosEstabelecimento } from "../controllers/controllerEstabelecimento.js";
 
 
 const router = express.Router();
@@ -11,5 +11,8 @@ router.post("/estabelecimentos", criarEstabelecimento);
 router.post("/estabelecimentos/login", loginEstabelecimento);
 
 router.get("/estabelecimentos", todosEstabelecimento);
+
+router.get("/estabelecimentos/:slug", EstabelecimentoSlug);
+
 
 export default router;
